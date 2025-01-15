@@ -37,7 +37,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 # Include Vulkan
 find_package(Vulkan REQUIRED)
 target_include_directories(${PROJECT_NAME} PRIVATE $ENV{VULKAN_SDK}/include)
-target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan)
+target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan)
 
 # Compiler definitions
 target_compile_definitions(${PROJECT_NAME} PRIVATE GL_SILENCE_DEPRECATION)
