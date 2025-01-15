@@ -24,10 +24,6 @@ set(TINYGLTF_INSTALL OFF CACHE INTERNAL "" FORCE)
 add_subdirectory(external/tinygltf)
 target_include_directories(${PROJECT_NAME} PRIVATE "external/tinygltf")
 
-# add_library(glad STATIC external/glad/src/glad.c)
-# target_include_directories(glad PUBLIC external/glad/include)
-# target_link_libraries(${PROJECT_NAME} PRIVATE glad)
-
 # add_library(stb STATIC external/stb/src/stb_image.cpp)
 # target_include_directories(stb PUBLIC external/stb/include)
 # target_link_libraries(${PROJECT_NAME} PRIVATE stb)
@@ -38,12 +34,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE glm)
 add_subdirectory(external/glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 
-# Include OpenGL framework or libraries
-# if(APPLE)
-#     target_link_libraries(${PROJECT_NAME} PRIVATE "-framework OpenGL")
-# elseif(UNIX)
-#     target_link_libraries(${PROJECT_NAME} PRIVATE GL)
-# endif()
+# Include Vulkan
+find_package(Vulkan REQUIRED)
+target_include_directories(${PROJECT_NAME} PRIVATE $ENV{VULKAN_SDK}/include)
+target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan)
 
 # Compiler definitions
 target_compile_definitions(${PROJECT_NAME} PRIVATE GL_SILENCE_DEPRECATION)
